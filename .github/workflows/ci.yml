@@ -1,0 +1,42 @@
+name: Dart CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  job_001:
+    name: "Deploy server to VPS"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+
+      - name: Copy code to remote server
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USERNAME }}
+          password: ${{ secrets.VPS_PASSWORD }}
+          port: ${{ secrets.VPS_PORT }}
+          source: "./*"
+          target: "/var/docker_projects/${{ github.repository }}"
+
+      - name: Build and bring containers online
+        uses: cross-the-world/ssh-pipeline@master
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          user: ${{ secrets.VPS_USERNAME }}
+          pass: ${{ secrets.VPS_PASSWORD }}
+          port: ${{ secrets.VPS_PORT }}
+          connect_timeout: 10s
+          script: |
+            cd "/var/docker_projects/${{ github.repository }}"
+            docker-compose up -d --remove-orphans --build
