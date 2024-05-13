@@ -5,6 +5,7 @@ analyzer:
     todo: ignore
   exclude:
     - "lib/l10n/*.dart"
+    - "stubs/**"
 
 linter:
   rules:

@@ -24,7 +24,7 @@ final directories = <_i1.WidgetbookNode>[
           designLink:
               'https://www.figma.com/design/FHIEGBfRVmrRU1UWkXwyJI/P%26T-dag?node-id=1%3A3&t=73rNYjBislEpq4Pq-1',
         ),
-      )
+      ),
     ],
   )
 ];

@@ -38,6 +38,11 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   intl: any
+  ansicolor: ^2.0.2
+  dart_console: ^4.1.0
+  enough_ascii_art: ^1.1.0
+  change_case: ^2.0.1
+  process_run: ^0.14.2
 
 dev_dependencies:
   flutter_test:
