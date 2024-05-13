@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pent_day_2024/l10n/app_localizations.dart';
 import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
+import 'package:widgetbook_workspace/figma_addon.dart';
 
 import 'main.directories.g.dart';
 
@@ -23,6 +24,13 @@ class WidgetbookApp extends StatelessWidget {
         );
       },
       addons: [
+        MaterialThemeAddon(
+          themes: [
+            WidgetbookTheme(name: 'Light', data: ThemeData.light()),
+            WidgetbookTheme(name: 'Dark', data: ThemeData.dark()),
+          ],
+        ),
+        FigmaAddon(),
         DeviceFrameAddon(devices: [
           Devices.ios.iPhone13,
           Devices.android.onePlus8Pro,
@@ -33,7 +41,7 @@ class WidgetbookApp extends StatelessWidget {
           locales: AppLocalizations.supportedLocales,
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           initialLocale: AppLocalizations.supportedLocales.last,
-        )
+        ),
       ],
       directories: directories,
     );

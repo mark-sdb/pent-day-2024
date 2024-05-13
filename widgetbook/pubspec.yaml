@@ -13,7 +13,11 @@ dependencies:
   widgetbook_annotation: ^3.1.0
   pent_day_2024: 
     path: ../
-  figma_frame_inspector: ^0.0.5
+  figma_frame_inspector: 
+    git: 
+      url: https://github.com/mark-sdb/figma-frame-inspector.git
+      ref: main
+  url_launcher: ^6.2.6
 
 dev_dependencies:
   flutter_test:
