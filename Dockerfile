@@ -14,6 +14,8 @@ COPY ./ ./
 
 # Fetch all dependencies
 RUN flutter pub get --offline
+RUN flutter gen-l10n
+
 RUN cd widgetbook && flutter pub get --offline
 
 RUN cd widgetbook && dart run build_runner build -d
