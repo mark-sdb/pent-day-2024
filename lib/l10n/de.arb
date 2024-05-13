@@ -1,4 +1,5 @@
 {
     "@@locale": "de",
-    "appTitle": "P&T Tag 2024!"
+    "appTitle": "P&T Tag 2024!",
+    "exampleButtonText": "Whohoo endlich ein Button!"
   }

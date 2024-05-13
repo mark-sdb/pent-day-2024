@@ -12,8 +12,9 @@
         {
             "name": "WidgetBook",
             "request": "launch",
+            "program": "lib/main.dart",
             "type": "dart",
-            "program": "widgetbook/lib/main.dart"
+            "cwd": "${workspaceFolder}/widgetbook"
         }
     ]
 }
