@@ -286,7 +286,7 @@ packages:
     description:
       path: "."
       ref: main
-      resolved-ref: "08c2b3a1cfe2a48c661d1cf98417dae80774f8e6"
+      resolved-ref: "7caa505f40664129999e65dc2f454d4bfcc0a12d"
       url: "https://github.com/mark-sdb/figma-frame-inspector.git"
     source: git
     version: "0.0.5"

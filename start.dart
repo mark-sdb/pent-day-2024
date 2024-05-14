@@ -47,9 +47,18 @@ Future<void> main() async {
 
   console.writeLine();
   console.setForegroundColor(ConsoleColor.blue);
-  console.writeLine('This will take a couple of seconds');
+  console.writeLine('This will take a couple of seconds!!');
   console.setForegroundColor(defaultColor);
+
+  console.writeLine('Generating files ');
   await Shell().cd('widgetbook').run('dart run build_runner build --delete-conflicting-outputs');
+
+  console.writeLine('Getting dependencies');
+  await Shell().run('flutter pub get');
+  await Shell().cd('widgetbook').run('flutter pub get');
+
+  console.writeLine('Generating l10n files');
+  await Shell().run('flutter gen-l10n');
 
   console.writeLine();
 
@@ -96,5 +105,3 @@ String ask(String question, String errorMessage) {
   console.resetColorAttributes();
   return output;
 }
-
-// https://www.figma.com/design/FHIEGBfRVmrRU1UWkXwyJI/P%26T-dag?node-id=8%3A15&t=6GeJuqciKrrpZr7E-1

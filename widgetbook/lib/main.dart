@@ -30,13 +30,13 @@ class WidgetbookApp extends StatelessWidget {
             WidgetbookTheme(name: 'Dark', data: ThemeData.dark()),
           ],
         ),
+        AlignmentAddon(),
         FigmaAddon(),
         DeviceFrameAddon(devices: [
           Devices.ios.iPhone13,
           Devices.android.onePlus8Pro,
         ]),
         TextScaleAddon(scales: [1.0, 1.5, 2.0]),
-        AlignmentAddon(),
         LocalizationAddon(
           locales: AppLocalizations.supportedLocales,
           localizationsDelegates: AppLocalizations.localizationsDelegates,

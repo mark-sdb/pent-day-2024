@@ -3,14 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:widgetbook/widgetbook.dart';
 
-enum FigmaPreviewType { disabled, below, behind }
-
 class FigmaSettings {
-  final FigmaPreviewType previewType;
+  final ChildDisplayType childDisplayType;
   final double opacity;
 
   FigmaSettings({
-    required this.previewType,
+    required this.childDisplayType,
     required this.opacity,
   });
 }
@@ -23,14 +21,23 @@ class FigmaAddon extends WidgetbookAddon<FigmaSettings> {
   @override
   List<Field> get fields => [
         FigmaButtonField(name: 'open_in_figma_button'),
-        ListField<FigmaPreviewType>(
-          name: 'figma_preview_type',
-          values: FigmaPreviewType.values,
-          initialValue: FigmaPreviewType.disabled,
+        ListField<ChildDisplayType>(
+          name: 'figma_child_display_type',
+          values: [
+            ChildDisplayType.disabled,
+            ChildDisplayType.columnChildOnBottom,
+            ChildDisplayType.columnChildOnTop,
+            ChildDisplayType.stackedChildOnBottom,
+            ChildDisplayType.stackedChildOnTop,
+          ],
+          initialValue: ChildDisplayType.disabled,
           labelBuilder: (type) => switch (type) {
-            FigmaPreviewType.disabled => 'Disabled',
-            FigmaPreviewType.below => 'Below',
-            FigmaPreviewType.behind => 'Behind',
+            ChildDisplayType.disabled => 'Disabled',
+            ChildDisplayType.columnChildOnBottom => 'Widget below Figma',
+            ChildDisplayType.columnChildOnTop => 'Widget above Figma',
+            ChildDisplayType.stackedChildOnBottom => 'Widget behind Figma',
+            ChildDisplayType.stackedChildOnTop => 'Widget on top of Figma',
+            _ => throw UnimplementedError(),
           },
         ),
         DoubleSliderField(
@@ -44,7 +51,7 @@ class FigmaAddon extends WidgetbookAddon<FigmaSettings> {
   @override
   FigmaSettings valueFromQueryGroup(Map<String, String> group) {
     return FigmaSettings(
-      previewType: valueOf('figma_preview_type', group),
+      childDisplayType: valueOf('figma_child_display_type', group),
       opacity: valueOf('figma_opacity', group) ?? 1.0,
     );
   }
@@ -53,7 +60,7 @@ class FigmaAddon extends WidgetbookAddon<FigmaSettings> {
   Widget buildUseCase(BuildContext context, Widget child, FigmaSettings setting) {
     final figmaUrl = WidgetbookState.of(context).useCase?.designLink;
 
-    if (figmaUrl == null || setting.previewType == FigmaPreviewType.disabled) {
+    if (figmaUrl == null) {
       return child;
     }
     opacityNotifier.value = setting.opacity;
@@ -65,11 +72,7 @@ class FigmaAddon extends WidgetbookAddon<FigmaSettings> {
       frameUrl: figmaUrl,
       scale: 1,
       opacityNotifier: opacityNotifier,
-      alignment: switch (setting.previewType) {
-        FigmaPreviewType.disabled => AlignmentDirectional.center,
-        FigmaPreviewType.below => AlignmentDirectional.bottomCenter,
-        FigmaPreviewType.behind => AlignmentDirectional.center,
-      },
+      childDisplayType: setting.childDisplayType,
       child: child,
     );
   }
