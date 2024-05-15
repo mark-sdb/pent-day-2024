@@ -7,7 +7,7 @@ import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 @widgetbook.UseCase(
   name: 'NAME',
   type: NAME,
-  designLink: '', // You can add a link to your Figma frame here
+  designLink: 'FIGMAURL', // You can add a link to your Figma frame here
 )
 Widget buildNAMEUseCase(BuildContext context) {
   // Add your knobs here (context.knobs.*)

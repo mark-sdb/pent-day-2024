@@ -5,9 +5,10 @@ import 'package:widgetbook/widgetbook.dart';
 import 'package:widgetbook_annotation/widgetbook_annotation.dart' as widgetbook;
 
 @widgetbook.UseCase(
-    name: 'Default',
-    type: ExampleButton,
-    designLink: 'https://www.figma.com/design/FHIEGBfRVmrRU1UWkXwyJI/P%26T-dag?node-id=1%3A3&t=73rNYjBislEpq4Pq-1')
+  name: 'Default',
+  type: ExampleButton,
+  designLink: 'https://www.figma.com/design/FHIEGBfRVmrRU1UWkXwyJI/P%26T-dag?node-id=1%3A3&t=73rNYjBislEpq4Pq-1',
+)
 Widget buildCoolButtonUseCase(BuildContext context) {
   final l10nEnabled = context.knobs.boolean(label: 'Enable localization', initialValue: false);
   final label = l10nEnabled

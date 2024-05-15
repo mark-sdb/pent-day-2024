@@ -10,6 +10,12 @@
             "type": "dart"
         },
         {
+            "name": "Slides",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/slides/app.dart",
+        },
+        {
             "name": "WidgetBook",
             "request": "launch",
             "program": "lib/main.dart",

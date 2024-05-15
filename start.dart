@@ -26,7 +26,20 @@ Future<void> main() async {
     'Je moet wel een component naam invullen!',
   );
 
-  final fileName = [componentName, userName].map((e) => e.trim().toPascalCase()).toList().join().toSnakeCase();
+  final figmaUrl = ask(
+    '''Wat is de Figma URL van het component wat je wil gaan maken? 
+    1. Ga naar je Figma file 
+    2. Klik op het frame van het component
+    3. Klik rechtsboven op "Share"
+    4. Klik op "Copy link"''',
+    'Je moet wel een Figma URL invullen!',
+  );
+
+  final fileName = [
+    userName,
+    componentName,
+  ].map((e) => e.trim().toPascalCase()).toList().join().toSnakeCase();
+
   final className = componentName.toPascalCase();
 
   console.writeLine();
@@ -37,8 +50,11 @@ Future<void> main() async {
   File('./lib/components/$fileName.dart').writeAsStringSync(widgetTemplate);
 
   // Copy the widgetbook file to its place
-  final widgetbookTemplate =
-      File('./stubs/story.dart').readAsStringSync().replaceAll('NAME', className).replaceAll('FILE', fileName);
+  final widgetbookTemplate = File('./stubs/story.dart')
+      .readAsStringSync()
+      .replaceAll('NAME', className)
+      .replaceAll('FILE', fileName)
+      .replaceAll('FIGMAURL', figmaUrl);
   File('./widgetbook/lib/components/$fileName.dart').writeAsStringSync(widgetbookTemplate);
 
   console.writeLine('Generating files for widgetbook ... ');
