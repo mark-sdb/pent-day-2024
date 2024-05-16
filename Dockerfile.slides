@@ -1,0 +1,30 @@
+FROM ghcr.io/cirruslabs/flutter:3.19.6 AS build
+
+WORKDIR /app
+
+# Copy pubspec and lock files (and local path dependency)
+COPY ./pubspec.* ./
+
+RUN flutter pub get
+
+# Copy app dir over to the container
+COPY ./ ./
+
+# Fetch all dependencies
+RUN flutter pub get --offline
+RUN flutter gen-l10n
+
+# Build the app for the web
+RUN flutter build web --release -t lib/slides/app.dart
+
+# Use a smaller image, for serving the web app
+FROM nginx:alpine
+
+# Copy the built web app to the nginx server
+COPY --from=build ./app/build/web /usr/share/nginx/html
+
+# Expose the port
+EXPOSE 80
+
+# Start the server
+CMD ["nginx", "-g", "daemon off;"]

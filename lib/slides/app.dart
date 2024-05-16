@@ -73,7 +73,8 @@ class SlidesApp extends StatelessWidget {
               '- IDE (VSCode, IntelliJ)',
               '',
               '1. Fork repo: https://repo.pent.day',
-              '2. Execute: `dart start.dart` (project root)',
+              '2. Run `flutter pub get`',
+              '3. Execute: `dart start.dart` (project root)',
             ],
             transition: _defaultTransition,
           ),
@@ -82,7 +83,8 @@ class SlidesApp extends StatelessWidget {
             subtitle: 'Rules of the game!',
             bulletByBullet: true,
             bullets: const [
-              '- Geen externe packages gebruiken',
+              '- Gebruik je gemaakte figma file van vanochtend of https://figma.pent.day'
+                  '- Geen externe packages gebruiken',
               '- Probeer zo dicht mogelijk bij het design te blijven\n  (Gebruik de Widgetbook Figma addon)',
               '\nExtras om te kunnen uitwerken:',
               '    - Dark/Light mode',
