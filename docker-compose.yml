@@ -6,11 +6,6 @@ services:
     build:
       context: ./
 
-  pent_slides:
-    container_name: pent_day_2024_slides
-    build:
-      context: ./Dockerfile.slides
-
 networks:
   default:
     external: true
